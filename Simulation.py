@@ -142,7 +142,7 @@ def main():
     # Initialize the body list and the patches by reading the values from keyboard
     body_list = []
     patches = []
-    solar_system = Simulation(3000, body_list, patches)
+    solar_system = Simulation(1000, body_list, patches)
     # Run the simulation
     solar_system.read_values()
     solar_system.run_simulation()
@@ -150,8 +150,9 @@ def main():
     plt.plot(solar_system.time_flow, solar_system.kin_energy, label = "Kinetic energy")
     plt.plot(solar_system.time_flow, solar_system.pot_energy, label = "Potential energy")
     plt.plot(solar_system.time_flow, solar_system.total_energy, label = "Total energy")
+    plt.legend()
     plt.xlabel("Time step")
-    plt.ylabel("Kinetic energy")
+    plt.ylabel("Energies")
     plt.show()
     # Find out the half period of each planet
     for i in range (1, len(solar_system.body_list)):
@@ -161,37 +162,3 @@ def main():
             print("The orbit of planet " + str(i) + " is not stable")
 
 main()  
-
-
-"""from matplotlib import animation
-from IPython.display import HTML
-
-def motion(r,v):
-    acc_x = -gg*mass*r[0]/norm(np.array([r[0], r[1]]))**3
-    acc_y = -gg*mass*r[1]/norm(np.array([r[0], r[1]]))**3
-    v += np.array([acc_x, acc_y]) * dt
-    r += v * dt
-    return r
-
-fig, ax = plt.subplots()
-ax.set_xlim(-max(r_x), max(r_x))
-ax.set_ylim(-max(r_y), max(r_y))
-line, = ax.plot([], [], lw=2)
-
-def init():
-    return patches
-
-# animation function. This will be call in a sequence to generate frames.
-def animate(i):
-    r0 = motion(r,v)
-    patches[0].center = (r[0], r[1]) 
-    return patches
-
-patches = []
-patches.append(plt.Circle((rs[0],0), 10, color = 'b', animated = True))
-patches.append(plt.Circle((0,0), radius, color = 'r', animated = True))
-
-anim = animation.FuncAnimation(fig, func=animate, init_func=init,
-                               frames=200, interval=20, blit=True)
-HTML(anim.to_jshtml())
-plt.show()"""
